@@ -5,6 +5,7 @@ import com.crudDemo.crud.repository.TodoRepo
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.print.attribute.IntegerSyntax
 
 @Controller
@@ -25,11 +26,15 @@ class MainController(private var pr: TodoRepo) {
     @RequestMapping("/findById")
     fun findById(@RequestParam id:Integer, m: Model):String{
         var t:Todo = pr.getOne(id)
-        println(t.id)
-        if(t.id !=null) {
-            m.addAttribute("todo",t)
-             return "TodoInfo.html"
-        }else return "No data found by this ID"
+        m.addAttribute("todo",t)
+        return "TodoInfo.html"
+    }
+
+    @GetMapping("/findByDate")
+    fun findByDate(@RequestParam date: Date, m: Model):String{
+        var t:List<Todo>  = pr.findBydate(date)
+        m.addAttribute("todos",t)
+        return "AllTodoItem.html"
     }
 
     @RequestMapping("/deleteTodo")

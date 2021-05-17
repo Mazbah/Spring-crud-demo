@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Todo Item</title>
+</head>
+<body>
+    <h3 >Todo Item</h3>
+    <table>
+        <tr th:each="t: ${todos}">
+            <td th:text="${t.id}"></td>
+            <td th:text="${t.date}"></td>
+            <td th:text="${t.title}"></td>
+            <td th:text="${t.Des}"></td>
+        </tr>
+    </table>
+</body>
+</html>
